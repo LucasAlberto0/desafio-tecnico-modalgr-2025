@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ToastService } from '../../service/toast/toast.service';
+import { ToastComponent } from '../../components/toast/toast.component';
 
 @Component({
   selector: 'app-register-page',
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, ToastComponent],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss'
 })
@@ -21,7 +23,7 @@ export class RegisterPageComponent {
   estado: string = '';
   dados: Array<{ nome: string, cpf: string, dataNascimento: string, email: string, cep: string, logradouro: string, bairro: string, cidade: string, estado: string }> = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastService: ToastService) { }
 
   consultarCEP() {
     if (this.cep && this.cep.length === 9) {
@@ -35,12 +37,11 @@ export class RegisterPageComponent {
             this.cidade = response.localidade || '';
             this.estado = response.uf || '';
           } else {
-            alert('CEP não encontrado');
+            this.toastService.showToast('CEP não encontrado.');
           }
         },
         (error) => {
-          alert('Erro ao consultar o CEP');
-          console.error(error);
+          this.toastService.showToast('Erro ao consultar CEP.');
         }
       );
     }
@@ -76,13 +77,16 @@ export class RegisterPageComponent {
   somenteNumeros(event: KeyboardEvent): void {
     const tecla = event.key;
     const codigoTecla = event.keyCode;
-
     if (!/\d/.test(tecla) && ![8, 46].includes(codigoTecla)) {
       event.preventDefault();
     }
   }
 
   cadastrar() {
+    if (!this.nome || !this.cpf || !this.dataNascimento || !this.email || !this.cep || !this.logradouro || !this.bairro || !this.cidade || !this.estado) {
+      this.toastService.showToast('Todos os campos são obrigatórios.');
+      return;
+    }
     const novoCadastro = {
       nome: this.nome,
       cpf: this.cpf,
