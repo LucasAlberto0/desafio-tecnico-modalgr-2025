@@ -1,0 +1,121 @@
+.bg-cinza-claro{
+    background-color: #ebf5f7;
+}
+
+.img-modal{
+    width: 600px;
+    img{
+        border-radius: 50px 0% 50px 0%;
+        border-top: 20px solid #dc853d;  
+        border-bottom: 20px solid #dc853d;
+    }
+}
+
+.text-custom{
+    color: #3b753e;
+}
+
+button {
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    
+}
+
+.hover-group:hover {
+    background-color: #1e83b4;  
+    transform: scale(1.05);  
+    color: white;
+}
+.lupaIcon {
+    transition: transform 0.3s ease;
+}
+button:hover .lupaIcon {
+    transform: translateX(10px); 
+    filter: brightness(0) invert(1); 
+    background: transparent;
+}
+
+@media(max-width: 1535px){
+    .img-modal{
+        width: 500px;
+    }
+
+}
+
+@media(max-width: 1280px){
+    .img-modal{
+        width: 420px;
+    }
+    .description{
+        max-width: 500px;
+    }
+}
+
+@media(max-width: 1120px){
+    .img-modal{
+        width: 400px;
+    }
+    .description{
+        max-width: 470px;
+    }
+}
+
+@media(max-width: 990px){
+    article{
+        flex-direction: column;
+        justify-content: center;      
+    }
+    
+    .img-modal{
+        width: 550px;
+    }
+    .description{
+        max-width: 700px;
+        margin-top: 60px;
+    }
+    
+}
+
+@media(max-width: 768px){
+    .img-modal{
+        width: 450px;
+    }
+    .description{
+        max-width: 500px;
+    }
+}
+
+@media(max-width: 640px){
+    .img-modal{
+        width: 420px;
+    }
+    .description{
+        max-width: 440px;
+        margin-top: 40px;
+    }
+}
+
+@media(max-width: 480px){
+    section{
+        height: 110vh;
+    }
+    .img-porto{
+        width: 335px;
+    }
+    .description{
+        max-width: 335px;
+        text-align: justify;
+    }
+}
+
+@media(max-width: 350px){
+    .img-modal{
+        width: 350px;
+    }
+    .description{
+        max-width: 350px;
+        margin-top: 40px;
+    }
+}
+
+
+
