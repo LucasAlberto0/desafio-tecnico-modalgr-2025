@@ -1,3 +1,87 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-azul-claro {
+    background-color: #a8d7f6;
+}
+
+.bg-azul-escuro {
+    background-color: #1e83b4;
+}
+
+.bg-laranja-modal {
+    background-color: #dc853d;
+}
+
+
+
+//Animações globais
+//al -> animação vindo da esquerda
+//aup -> animação vindo de cima
+//za -> animação zoom
+//zag -> animação zoom do gif
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.al {
+    animation: slideInFromLeft 1s ease-in-out forwards;
+}
+
+@keyframes slideInFromUp {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.aup {
+    animation: slideInFromUp 1s ease-in-out forwards;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.4);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.za {
+    animation: zoomIn 0.7s ease-in-out forwards;
+}
+
+@keyframes zoomInGif {
+    from {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+}
+
+.zag {
+    animation: zoomInGif 1.2s ease-in-out forwards;
+}

@@ -1,0 +1,31 @@
+
+<header id="header">
+    <div class="container 2xl:max-w-7xl xl:max-w-6xl md:max-w-5xl sm:max-w-2xl xs:max-w-xl ">
+        <div class="flex">
+            <a class="flex justify-center">
+                <img src="img/logo-modal.png" alt=""> </a>
+            <nav class="desktop hanuman-bold">
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/developer">DESENVOLVEDOR</a></li>
+                    <button class="bg-green ml-1 py-2 px-4 rounded-xl" onclick="window.location.href='/register'">REGISTRAR</button>
+                </ul>
+            </nav>
+            <nav class="mobile transition_on">
+                <div class="hamburguer-bt mobile" [ngClass]="{'ativo': menuAtivo}" (click)="toggleMenu()">
+                    <div class="hamburguer_line hamburguer-top"></div>
+                    <div class="hamburguer_line hamburguer-middle"></div>
+                    <div class="hamburguer_line hamburguer-bottom"></div>
+                </div>
+            </nav>
+            <div id="opt_menu" class="mobile transition_on" [ngClass]="{'ativo': menuAtivo}">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/developer">Desenvolvedor</a></li>
+                    <button class="mt-3 bg-green py-2 px-4 rounded-xl font-bold" onclick="window.location.href='/register'">Consultar</button>
+                </ul>
+            </div>
+            <div class="fundo_menu mobile transition_on" [ngClass]="{'ativo': menuAtivo}" (click)="toggleMenu()"></div>
+        </div>
+    </div>
+</header>
