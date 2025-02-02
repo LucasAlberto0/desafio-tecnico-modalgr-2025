@@ -1,0 +1,79 @@
+<section class="w-screen sm:h-screen h-auto flex justify-center items-center flex-row relative"
+    style="background-image: url('img/InternoModal.jpg'); background-size: cover; background-position: center;">
+    <div class="overlay"></div>
+    <article
+        class="flex flex-col justify-center xl:max-w-xl md:max-w-5xl sm:max-w-2xl bg-white px-4 sm:px-10 z-10 w-full py-20 border-r-8 border-blue-300 md:rounded-r-2xl md:h-full bg-azul-claro w-[380px] md:w-[600px] al my-10 sm:my-0">
+        <a href="/">
+            <div class="flex flex-row gap-1 items-center absolute top-0 left-0 p-4"><img
+                    src="img/icons/blueBackIcon.svg" width="36" height="36" alt=""> <span
+                    class="font-bold text-blue-500 hidden sm:block">Voltar</span></div>
+        </a>
+        <div class="flex flex-col justify-center items-center gap-2 mb-6"><img src="img/logo-modal.png" width="100"
+                height="70" alt="">
+            <p class="font-bold text-2xl sm:text-3xl">CADASTRO</p>
+        </div>
+        <div class="flex flex-col gap-2 mb-7">
+            <input type="text" [(ngModel)]="nome" class="border border-2 border-blue-300 rounded-lg py-2 px-4 placeholder-blue-400"
+                placeholder="Digite o Nome" maxlength="150"
+                oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '')" />
+
+            <input [(ngModel)]="cpf" (input)="formatarCPF($event)" (keydown)="somenteNumeros($event)"
+                class="border border-2 border-blue-300 rounded-lg py-2 px-4 placeholder-blue-400"
+                placeholder="Digite o CPF" maxlength="14" />
+
+            <input type="date" [(ngModel)]="dataNascimento" class="border border-2 border-blue-300 rounded-lg py-2 px-4 placeholder-blue-400"
+                placeholder="Digite a Data de Nascimento" />
+
+            <input type="email" [(ngModel)]="email" class="border border-2 border-blue-300 rounded-lg py-2 px-4 placeholder-blue-400"
+                placeholder="Digite o E-mail" />
+
+            <input type="text" [(ngModel)]="cep" (ngModelChange)="consultarCEP()" class="border border-2 border-blue-300 rounded-lg py-2 px-4 placeholder-blue-400"
+                placeholder="Digite o CEP" maxlength="10" (input)="formatarCEP($event); consultarCEP()"
+                (keydown)="somenteNumeros($event)" />
+        </div>
+
+        <button (click)="cadastrar()"
+            class="py-2 sm:py-2 px-16 bg-blue-300 text-base sm:text-lg rounded-xl flex flex-row gap-3 hover-group hanuman-bold justify-center">
+            Cadastrar
+        </button>
+    </article>
+
+    <article class="w-full hidden md:block flex justify-center"><div>
+        <p *ngIf="dados.length >= 5" class="text-red-500 text-sm mt-2">Limite de 5 cadastros atingido!</p>
+        <div *ngIf="dados.length > 0" class="mt-6 px-10">
+            <table class="min-w-full text-center text-sm bg-white border-8 border-blue-300 za">
+                <thead class="bg-azul-escuro text-white rounded-2xl">
+                    <tr>
+                        <th class="border-b-2 px-4 py-2">Nome</th>
+                        <th class="border-b-2 px-4 py-2">CPF</th>
+                        <th class="border-b-2 px-4 py-2">Data de Nascimento</th>
+                        <th class="border-b-2 px-4 py-2">E-mail</th>
+                        <th class="border-b-2 px-4 py-2">CEP</th>
+                        <th class="border-b-2 px-4 py-2">Logradouro</th>
+                        <th class="border-b-2 px-4 py-2">Bairro</th>
+                        <th class="border-b-2 px-4 py-2">Cidade</th>
+                        <th class="border-b-2 px-4 py-2">Estado</th>
+                        <th class="border-b-2 px-4 py-2 bg-red-500">Apagar</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr class="za" *ngFor="let dado of dados; let i = index">
+                        <td class="border-b px-4 py-2">{{ dado.nome }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.cpf }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.dataNascimento | date }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.email }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.cep }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.logradouro }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.bairro }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.cidade }}</td>
+                        <td class="border-b px-4 py-2">{{ dado.estado }}</td>
+                        <td class="border-b px-4 py-2">
+                            <button (click)="deletar(i)" class="text-red-500 hover:underline">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div></div>
+        <!-- <img class="zag gifCustom mx-auto w-[800px] h-[400px] lg:h-[600px]" src="img/InternoModal.jpg" alt="">-->
+    </article>
+</section>

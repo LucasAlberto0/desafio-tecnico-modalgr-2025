@@ -1,0 +1,51 @@
+.bg-azul-claro{
+    background-color: #e4eff0;
+}
+
+input:focus {
+    border-color: #0c5688; 
+    outline: none; 
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); 
+    z-index: 1;  
+}
+
+.gifCustom{
+    border-radius: 50px 0% 50px 0%;
+    border-top: 20px solid #93c5fd;  
+    border-bottom: 20px solid #93c5fd;
+    transform: scale(0.8);
+}
+
+article {
+    z-index: 10;  
+}
+
+button {
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    &:hover {
+        background-color: #1f7de7;  
+        transform: scale(1.05);  
+        color: white;
+    } 
+}
+
+@media (max-width: 767px){
+    article{
+        border: #93c5fd 4px solid;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 430px){
+    article{
+        width: 320px;
+    }
+}
