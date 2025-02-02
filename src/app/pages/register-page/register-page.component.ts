@@ -36,13 +36,8 @@ export class RegisterPageComponent {
             this.bairro = response.bairro || '';
             this.cidade = response.localidade || '';
             this.estado = response.uf || '';
-          } else {
-            this.toastService.showToast('CEP não encontrado.');
-          }
+          } 
         },
-        (error) => {
-          this.toastService.showToast('Erro ao consultar CEP.');
-        }
       );
     }
   }
@@ -83,8 +78,39 @@ export class RegisterPageComponent {
   }
 
   cadastrar() {
+
+    const dataNascimentoSelecionada = new Date(this.dataNascimento);
+  const dataAtual = new Date();
+
+  if (dataNascimentoSelecionada > dataAtual) {
+    this.toastService.showToast('A data de nascimento não pode ser no futuro.');
+    return; 
+  }
+
+    if (this.dados.length >= 3) {
+      this.toastService.showToast('Limite de 3 cadastros atingido!');
+      return;
+    }
+
+    if (!this.logradouro || !this.bairro || !this.cidade || !this.estado) {
+      this.toastService.showToast('CEP não encontrado. Verifique o CEP ou tente outro.');
+      return; 
+    }
+
     if (!this.nome || !this.cpf || !this.dataNascimento || !this.email || !this.cep || !this.logradouro || !this.bairro || !this.cidade || !this.estado) {
       this.toastService.showToast('Todos os campos são obrigatórios.');
+      return;
+    }
+
+    const cpfValido = this.cpf.replace(/\D/g, '').length === 11;
+    if (!cpfValido) {
+      this.toastService.showToast('CPF inválido. Certifique-se de inserir 11 dígitos.');
+      return;
+    }
+
+    const emailValido = this.email.length <= 200 && /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.email);
+    if (!emailValido) {
+      this.toastService.showToast('E-mail inválido ou maior que 200 caracteres.');
       return;
     }
     const novoCadastro = {
