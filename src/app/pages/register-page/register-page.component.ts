@@ -77,15 +77,41 @@ export class RegisterPageComponent {
     }
   }
 
+  formatarNome(): void {
+    if (this.nome) {
+      this.nome = this.nome
+        .toLowerCase()
+        .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
+    }
+  }
+
   cadastrar() {
 
     const dataNascimentoSelecionada = new Date(this.dataNascimento);
-  const dataAtual = new Date();
-
-  if (dataNascimentoSelecionada > dataAtual) {
-    this.toastService.showToast('A data de nascimento não pode ser no futuro.');
-    return; 
-  }
+    const dataAtual = new Date();
+    
+    if (dataNascimentoSelecionada > dataAtual) {
+      this.toastService.showToast('A data de nascimento não pode ser no futuro.');
+      return;
+    }
+    
+    if (dataNascimentoSelecionada.getFullYear() < 1900) {
+      this.toastService.showToast('A data de nascimento não pode ser antes de 1900.');
+      return;
+    }
+    
+    let idade = dataAtual.getFullYear() - dataNascimentoSelecionada.getFullYear();
+    const mesAtual = dataAtual.getMonth();
+    const mesNascimento = dataNascimentoSelecionada.getMonth();
+    
+    if (mesAtual < mesNascimento || (mesAtual === mesNascimento && dataAtual.getDate() < dataNascimentoSelecionada.getDate())) {
+      idade--;
+    }
+    
+    if (idade < 10) {
+      this.toastService.showToast('A pessoa precisa ter pelo menos 10 anos.');
+      return;
+    }
 
     if (this.dados.length >= 3) {
       this.toastService.showToast('Limite de 3 cadastros atingido!');
