@@ -36,7 +36,7 @@ export class RegisterPageComponent {
             this.bairro = response.bairro || '';
             this.cidade = response.localidade || '';
             this.estado = response.uf || '';
-          } 
+          }
         },
       );
     }
@@ -84,30 +84,43 @@ export class RegisterPageComponent {
         .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
     }
   }
+  calcularIdade(dataNascimento: string): number {
+    const dataNascimentoSelecionada = new Date(dataNascimento);
+    const dataAtual = new Date();
 
+    let idade = dataAtual.getFullYear() - dataNascimentoSelecionada.getFullYear();
+    const mesAtual = dataAtual.getMonth();
+    const mesNascimento = dataNascimentoSelecionada.getMonth();
+
+    if (mesAtual < mesNascimento || (mesAtual === mesNascimento && dataAtual.getDate() < dataNascimentoSelecionada.getDate())) {
+      idade--;
+    }
+
+    return idade;
+  }
   cadastrar() {
 
     const dataNascimentoSelecionada = new Date(this.dataNascimento);
     const dataAtual = new Date();
-    
+
     if (dataNascimentoSelecionada > dataAtual) {
       this.toastService.showToast('A data de nascimento não pode ser no futuro.');
       return;
     }
-    
+
     if (dataNascimentoSelecionada.getFullYear() < 1900) {
       this.toastService.showToast('A data de nascimento não pode ser antes de 1900.');
       return;
     }
-    
+
     let idade = dataAtual.getFullYear() - dataNascimentoSelecionada.getFullYear();
     const mesAtual = dataAtual.getMonth();
     const mesNascimento = dataNascimentoSelecionada.getMonth();
-    
+
     if (mesAtual < mesNascimento || (mesAtual === mesNascimento && dataAtual.getDate() < dataNascimentoSelecionada.getDate())) {
       idade--;
     }
-    
+
     if (idade < 10) {
       this.toastService.showToast('A pessoa precisa ter pelo menos 10 anos.');
       return;
@@ -120,7 +133,7 @@ export class RegisterPageComponent {
 
     if (!this.logradouro || !this.bairro || !this.cidade || !this.estado) {
       this.toastService.showToast('CEP não encontrado. Verifique o CEP ou tente outro.');
-      return; 
+      return;
     }
 
     if (!this.nome || !this.cpf || !this.dataNascimento || !this.email || !this.cep || !this.logradouro || !this.bairro || !this.cidade || !this.estado) {
