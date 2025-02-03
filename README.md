@@ -6,10 +6,10 @@ Teste técnico para seguir na candidatura da trilha de desenvolvimento Front-End
 
 
 ## Tecnologias utilizadas:
-- Angular
+- Angular v19.1.5
 - Typescript
 - Sass
-- TailwindCSS
+- TailwindCSS v3.4.17
 
 ## Deploy do projeto:
 https://desafiomodalgr25.vercel.app/
